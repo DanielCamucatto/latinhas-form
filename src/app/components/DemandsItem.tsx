@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrash, faTableList } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faTrash, faCalendar } from "@fortawesome/free-solid-svg-icons";
 
 
 type DemandsItemProps = {
@@ -37,9 +37,9 @@ const DemandItem: React.FC<DemandsItemProps> = ({
       <div className="flex gap-3">
         <div className="p-2">
           <FontAwesomeIcon
-            icon={faTableList}
+            icon={faCalendar}
             size="lg"
-            className="color-red"
+            style={{color: "#3498db"}}
           />
         </div>
         <div className="p-2">

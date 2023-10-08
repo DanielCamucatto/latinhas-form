@@ -87,7 +87,7 @@ const DemandsList = () => {
   return (
     <>
       <div>
-        <h2 className="text-2xl font-semibold mb-4">Lista de Demandas</h2>
+        <h2 className="text-2xl font-semibold mb-4 text-gray-500">LISTA DE DEMANDAS</h2>
         <div className="flex flex-wrap gap-3">
           {demands.map((demand) => (
             <DemandItem

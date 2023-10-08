@@ -23,9 +23,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Navbar/>
       <CustomToastContainer/>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+      <Navbar/>
+        {children}
+        </body>
     </html>
   )
 }
