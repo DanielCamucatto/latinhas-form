@@ -4,7 +4,7 @@ import DemandsCreateButton from "../components/DemandsCreateButton";
 
 const Main = () => {
     return (
-        <>
+        <>  
             <DemandsCreateButton />
             <DemandsList />
         </>

@@ -11,7 +11,7 @@ const NewDemands = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="relative min-h-screen flex items-center justify-center bg-gray-100">
       <button
         onClick={handleBack}
         className="absolute top-4 left-4 px-3 py-1 bg-blue-500 text-white rounded-md cursor-pointer"
