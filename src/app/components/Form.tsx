@@ -7,37 +7,38 @@ import 'tailwindcss/tailwind.css';
 const Form = () => {
   const { control, handleSubmit, reset } = useForm<FormValues>();
 
-  const defaultDeadline = '2023-12-31'; 
+  const defaultDeadline = new Date('2023-12-31'); // Converta a data padrão em um objeto Date
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-
     try {
-      const formData = new FormData(); 
-      formData.append('title', data.title); 
+      const formData = new FormData();
+      formData.append('title', data.title);
       formData.append('description', data.description);
 
-      let deadlineString = data.deadline instanceof Date ? data.deadline.toISOString() : data.deadline;
-      
-      if(!deadlineString || !Date.parse(deadlineString)){
-        deadlineString = defaultDeadline; 
+      // Verifique se data.deadline é uma instância de Date
+      let deadlineString =
+        data.deadline instanceof Date
+          ? data.deadline.toISOString()
+          : new Date(data.deadline).toISOString(); // Converta data.deadline em um objeto Date se não for
+
+      if (!deadlineString || !Date.parse(deadlineString)) {
+        deadlineString = defaultDeadline.toISOString();
       }
 
-      formData.append('deadline', deadlineString); 
+      formData.append('deadline', deadlineString);
       console.log('Dados do formulário:', data);
       reset();
 
-      const resp = await createDemand(formData); 
-      if(resp){
-        console.log('demanda cadastrada'); 
-        reset()
-      }else{
-        console.log('erro ao caadastrar a demanda')
+      const resp = await createDemand(formData);
+      if (resp) {
+        console.log('Demanda cadastrada');
+        reset();
+      } else {
+        console.log('Erro ao cadastrar a demanda');
       }
-
-    } catch(e) {
-      console.error('Erro ao cadastrar a demanda', e)
+    } catch (e) {
+      console.error('Erro ao cadastrar a demanda', e);
     }
-
   };
 
   return (
@@ -77,7 +78,6 @@ const Form = () => {
           <Controller
             name="deadline"
             control={control}
-            defaultValue={undefined}
             render={({ field }) => (
               <input
                 type="date"

@@ -30,12 +30,12 @@ export const createDemand = async (demandData: FormData) => {
         return resp.data;
         
     } catch (e) {
-        console.error('erro ao cadastrar a demanda', e); 
+        console.error('erro ao cadastrar a demanda POST', e); 
         throw e
     }
 }
 
-export const updateDemand = async (demandId: number, demandData: FormData) => {
+export const updateDemand = async (demandId: number, demandData: object) => {
     try {
         const resp = await api.put(`/demands/${demandId}`, demandData); 
         return resp.data;
