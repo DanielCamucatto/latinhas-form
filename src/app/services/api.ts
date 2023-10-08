@@ -24,7 +24,7 @@ export const getDemandByID = async (demandId: number) => {
     }
 }
 
-export const createDemand = async (demandData: FormData) => {
+export const createDemand = async (demandData: object) => {
     try {
         const resp = await api.post('/demands', demandData);
         return resp.data;

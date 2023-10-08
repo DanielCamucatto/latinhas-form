@@ -7,29 +7,32 @@ import 'tailwindcss/tailwind.css';
 const Form = () => {
   const { control, handleSubmit, reset } = useForm<FormValues>();
 
-  const defaultDeadline = new Date('2023-12-31'); // Converta a data padrão em um objeto Date
+  const defaultDeadline = new Date('2023-12-31');
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
-      const formData = new FormData();
-      formData.append('title', data.title);
-      formData.append('description', data.description);
+      let deadlineString: string;
 
-      // Verifique se data.deadline é uma instância de Date
-      let deadlineString =
-        data.deadline instanceof Date
-          ? data.deadline.toISOString()
-          : new Date(data.deadline).toISOString(); // Converta data.deadline em um objeto Date se não for
+      if (data.deadline instanceof Date) {
+        deadlineString = data.deadline.toISOString();
+      } else {
+        deadlineString = new Date(data.deadline).toISOString();
+      }
 
       if (!deadlineString || !Date.parse(deadlineString)) {
         deadlineString = defaultDeadline.toISOString();
       }
 
-      formData.append('deadline', deadlineString);
+      const requestData = {
+        title: data.title,
+        description: data.description,
+        deadline: deadlineString, // Agora é diretamente uma string
+      };
+
       console.log('Dados do formulário:', data);
       reset();
 
-      const resp = await createDemand(formData);
+      const resp = await createDemand(requestData);
       if (resp) {
         console.log('Demanda cadastrada');
         reset();
