@@ -3,6 +3,7 @@ import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { createDemand } from '../services/api';
 import { FormValues } from '../types/types';
 import 'tailwindcss/tailwind.css';
+import { toast } from 'react-toastify';
 
 const Form = () => {
   const { control, handleSubmit, reset } = useForm<FormValues>();
@@ -26,14 +27,14 @@ const Form = () => {
       const requestData = {
         title: data.title,
         description: data.description,
-        deadline: deadlineString, // Agora é diretamente uma string
+        deadline: deadlineString,
       };
 
-      console.log('Dados do formulário:', data);
       reset();
 
       const resp = await createDemand(requestData);
       if (resp) {
+        toast.success('Demanda cadastrada com sucesso')
         console.log('Demanda cadastrada');
         reset();
       } else {

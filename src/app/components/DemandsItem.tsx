@@ -51,13 +51,13 @@ const DemandItem: React.FC<DemandsItemProps> = ({
           <div className={`button-container ${isHovered ? "visible" : ""}`}>
             <button
               onClick={handleUpdate}
-              className="bg-blue-500 text-white py-2 px-4 mt-4 mr-2"
+              className="bg-blue-500 text-white py-2 px-4 mt-4 mr-2 rounded-md hover:opacity-90"
             >
               <FontAwesomeIcon icon={faEdit} /> Editar
             </button>
             <button
               onClick={handleDelete}
-              className="bg-red-500 text-white py-2 px-4 mt-4"
+              className="bg-red-500 text-white py-2 px-4 mt-4 rounded-md hover:opacity-90"
             >
               <FontAwesomeIcon icon={faTrash} /> Excluir
             </button>

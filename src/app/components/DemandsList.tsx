@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import DemandItem from "./DemandsItem";
 import { deleteDemand, getDemands, updateDemand } from "../services/api";
 import ReactModal from "react-modal";
+import { toast } from "react-toastify";
 
 interface Demand {
   id: number;
@@ -49,6 +50,7 @@ const DemandsList = () => {
             demand.id === updatedDemand.id ? updatedDemand : demand
           );
           setDemands(updatedDemands);
+          toast.success('Demanda atualizada com sucesso')
           setIsModalOpen(false); 
         } else {
           console.error("Erro ao atualizar a demanda: DemandsList");
@@ -61,8 +63,8 @@ const DemandsList = () => {
 
   const handleDeleteDemand = async (demandId: number) => {
     try {
-      const resp = await deleteDemand(demandId);
       const updateDemands = demands.filter((demand) => Number(demand.id) !== demandId);
+      toast.error('Demanda excluida com sucesso')
       setDemands(updateDemands);
     } catch (e) {
       console.error('Erro ao excluir demanda', e);
