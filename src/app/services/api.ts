@@ -56,4 +56,3 @@ export const deleteDemand = async (demandId: number) => {
 }
 
 export default api
-
