@@ -1,14 +1,43 @@
 import React from 'react';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
+import { createDemand } from '../services/api';
 import { FormValues } from '../types/types';
 import 'tailwindcss/tailwind.css';
 
 const Form = () => {
   const { control, handleSubmit, reset } = useForm<FormValues>();
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log('Dados do formulário:', data);
-    reset();
+  const defaultDeadline = '2023-12-31'; 
+
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+
+    try {
+      const formData = new FormData(); 
+      formData.append('title', data.title); 
+      formData.append('description', data.description);
+
+      let deadlineString = data.deadline instanceof Date ? data.deadline.toISOString() : data.deadline;
+      
+      if(!deadlineString || !Date.parse(deadlineString)){
+        deadlineString = defaultDeadline; 
+      }
+
+      formData.append('deadline', deadlineString); 
+      console.log('Dados do formulário:', data);
+      reset();
+
+      const resp = await createDemand(formData); 
+      if(resp){
+        console.log('demanda cadastrada'); 
+        reset()
+      }else{
+        console.log('erro ao caadastrar a demanda')
+      }
+
+    } catch(e) {
+      console.error('Erro ao cadastrar a demanda', e)
+    }
+
   };
 
   return (

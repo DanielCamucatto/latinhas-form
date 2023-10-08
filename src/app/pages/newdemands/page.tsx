@@ -1,8 +1,10 @@
+'use client'
+import Form from "@/app/components/Form";
 import React from "react";
 
 const NewDemands = () => {
   return (
-    <div>Isso aí, cara!</div>
+   <Form/>
   );
 };
 
