@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = process.env.NEXT_PUBLIC_BASE_URL; 
+const baseURL = 'https://server-latinhas-production.up.railway.app'  
 const api = axios.create({
     baseURL
 }); 
